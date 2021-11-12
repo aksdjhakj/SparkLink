@@ -1,6 +1,6 @@
 import web3 from './web3';
 
-const address = '0xb42d4525841008A69E427026DF354067fD6A524f'; // rinkeby 0x7B5B92B0eD1DfeafdbD724b177A7733Bda67497F
+const address = '0x7187211744c67F8cE89fEAc63b85D8D17417bDfE'; // rinkeby 0x7B5B92B0eD1DfeafdbD724b177A7733Bda67497F
 const abi = [
 	{
 		inputs: [],
@@ -785,6 +785,16 @@ const abi = [
 				internalType: 'address',
 				name: '_token_addr',
 				type: 'address'
+			},
+			{
+				internalType: 'bool',
+				name: '_is_NC',
+				type: 'bool'
+			},
+			{
+				internalType: 'bool',
+				name: '_is_ND',
+				type: 'bool'
 			}
 		],
 		name: 'publish',

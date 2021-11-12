@@ -22,6 +22,7 @@ import { TOKENPOCKET, METAMASK, LASTCONNECT, MATHWALLET } from '../global/global
 import { withTranslation } from 'react-i18next'
 import withCommon from '../styles/common'
 import Footer from '../components/Footer'
+import { getChainName } from '../utils/getWalletAccountandChainID'
 //TP钱包支持
 const tp = require('tp-js-sdk');
 //麦子钱包支持
@@ -173,7 +174,22 @@ class Collections extends Component {
 		// if (accounts.length === 0) {
 		// 	alert('请先连接Metamask')
 		// }
-		web3.setProvider(new Web3.providers.HttpProvider('https://polygon-mainnet.infura.io/v3/0232394ba4b34544a778575aefa2ee8c'))
+		const chainName = await getChainName();
+		switch(chainName){
+		case 'matic':
+			web3.setProvider(new Web3.providers.HttpProvider('https://polygon-mainnet.infura.io/v3/0232394ba4b34544a778575aefa2ee8c'))
+			break;
+		case 'bsc':
+			web3.setProvider(new Web3.providers.HttpProvider('https://polygon-mainnet.infura.io/v3/0232394ba4b34544a778575aefa2ee8c'))
+			break;
+		case 'eth':
+			web3.setProvider(new Web3.providers.HttpProvider('https://polygon-mainnet.infura.io/v3/0232394ba4b34544a778575aefa2ee8c'))
+			break;
+		default: 
+			web3.setProvider(new Web3.providers.HttpProvider('https://polygon-mainnet.infura.io/v3/0232394ba4b34544a778575aefa2ee8c'))
+			break;
+		}
+		// web3.setProvider(new Web3.providers.HttpProvider('https://polygon-mainnet.infura.io/v3/0232394ba4b34544a778575aefa2ee8c'))
 		//web3.setProvider(new Web3.providers.HttpProvider('https://matic-mainnet--jsonrpc.datahub.figment.io/apikey/e84b63fff0e37deb30837101f20eb793/'))
 		var account = null;
 		var value, accounts;
@@ -203,18 +219,18 @@ class Collections extends Component {
 		}
 
 		//const account = accounts[0]
-		const chainId = await window.ethereum.request({ method: 'eth_chainId' })
-		if (chainId !== '0x89') {
-			alert(t('请切换至Polygon 主网络'))
-			await window.ethereum.request({
-				method: 'wallet_switchEthereumChain',
-				params: [
-					{
-						chainId: '0x89',
-					},
-				],
-			})
-		}
+		// const chainId = await window.ethereum.request({ method: 'eth_chainId' })
+		// if (chainId !== '0x89') {
+		// 	alert(t('请切换至Polygon 主网络'))
+		// 	await window.ethereum.request({
+		// 		method: 'wallet_switchEthereumChain',
+		// 		params: [
+		// 			{
+		// 				chainId: '0x89',
+		// 			},
+		// 		],
+		// 	})
+		// }
 
 		let cards = []
 
@@ -294,8 +310,16 @@ class Collections extends Component {
   getNft = async (nft, account) => {
   	// let balanceId = [];
   	//0x9452644E9fdd59bD46A4d9eC24462995ADfD8d01
-  	var checksum_address = web3.utils.toChecksumAddress(account);
-  	var url = backend + '/api/v1/nft/list?owner=' + checksum_address
+
+
+  	const checksum_address = web3.utils.toChecksumAddress(account);
+  	const url = backend + '/api/v1/nft/list?owner=' + checksum_address
+
+  	//多链
+  	// const checksum_address = web3.utils.toChecksumAddress(account);
+  	// const chainName = await getChainName();
+  	// const url = backend + '/api/v1/nft/list?owner=' + checksum_address+'&chain=' + chainName;
+
   	console.debug('owner: ', checksum_address)
   	try {
   		var res = await axios.get(url)

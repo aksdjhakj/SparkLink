@@ -23,14 +23,15 @@ import { Progress, Spin, message } from 'antd'
 import axios from 'axios'
 import web3 from '../utils/web3'
 import config from '../global/config'
-import { TOKENPOCKET, METAMASK, LASTCONNECT, MATHWALLET } from '../global/globalsString'
+import { LASTCONNECT } from '../global/globalsString'
 import { withTranslation } from 'react-i18next'
 import withCommon from '../styles/common'
 import Footer from '../components/Footer'
+import { getChainName, getWalletAccount } from '../utils/getWalletAccountandChainID'
 const { gateway, backend } = config
 
-const mathwallet = require('math-js-sdk');
-const tp = require('tp-js-sdk')
+// const mathwallet = require('math-js-sdk');
+// const tp = require('tp-js-sdk')
 const FileSaver = require('file-saver')
 const CryptoJS = require('crypto-js')
 const abi = require('erc-20-abi')
@@ -179,18 +180,18 @@ class NFTInfo extends Component {
 			return
 		}
 
-		const chainId = await window.ethereum.request({ method: 'eth_chainId' })
-		if (chainId !== '0x89') {
-			alert(t('请切换至Polygon 主网络'))
-			await window.ethereum.request({
-				method: 'wallet_switchEthereumChain',
-				params: [
-					{
-						chainId: '0x89',
-					},
-				],
-			})
-		}
+		// const chainId = await window.ethereum.request({ method: 'eth_chainId' })
+		// if (chainId !== '0x89') {
+		// 	alert(t('请切换至Polygon 主网络'))
+		// 	await window.ethereum.request({
+		// 		method: 'wallet_switchEthereumChain',
+		// 		params: [
+		// 			{
+		// 				chainId: '0x89',
+		// 			},
+		// 		],
+		// 	})
+		// }
 
 		const price = await contract.methods.getShillPriceByNFTId(this.props.match.params.id).call()
 		const owner = await contract.methods.ownerOf(this.props.match.params.id).call()
@@ -213,27 +214,28 @@ class NFTInfo extends Component {
 		// 		})
 		// 	}
 		// }
-		var account = null;
-		var value, accounts;
-		const lastConnect = localStorage.getItem(LASTCONNECT);
-		switch (lastConnect) {
-		case TOKENPOCKET:
-			value = await tp.getCurrentWallet()
-			account = value.data.address;
-			break;
-		case MATHWALLET:
-			value = await mathwallet.getCurrentWallet()
-			account = value.address;
-			break;
-		case METAMASK:
-			accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-			account = accounts[0];
-			break;
-		default:
-			// accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-			// account = accounts[0];
-			break;
-		}
+		const account = await getWalletAccount()
+		// var account = null;
+		// var value, accounts;
+		// const lastConnect = localStorage.getItem(LASTCONNECT);
+		// switch (lastConnect) {
+		// case TOKENPOCKET:
+		// 	value = await tp.getCurrentWallet()
+		// 	account = value.data.address;
+		// 	break;
+		// case MATHWALLET:
+		// 	value = await mathwallet.getCurrentWallet()
+		// 	account = value.address;
+		// 	break;
+		// case METAMASK:
+		// 	accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+		// 	account = accounts[0];
+		// 	break;
+		// default:
+		// 	// accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+		// 	// account = accounts[0];
+		// 	break;
+		// }
 		if (account === null) {
 			alert(t('请先连接钱包'))
 			window.location.href = '/#/';
@@ -344,7 +346,10 @@ class NFTInfo extends Component {
 			this.setState({ dataUrl: 'fileAddr_PlaceHolder', loadItem: false })
 		}
 
-		const leafUrl = backend + '/api/v1/nft/info?nft_id=' + this.props.match.params.id
+		//多链
+		// const chainName = await getChainName()
+		// const leafUrl = backend + '/api/v1/nft/info?nft_id=' + this.props.match.params.id + '&chain=' + chainName;
+		const leafUrl = backend + '/api/v1/nft/info?nft_id=' + this.props.match.params.id;
 		axios
 			.get(leafUrl)
 			.then((res) => {

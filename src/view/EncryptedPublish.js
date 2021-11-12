@@ -18,13 +18,15 @@ import contract from '../utils/contract'
 import web3 from '../utils/web3'
 import Paper from '@material-ui/core/Paper'
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
-import * as tokens from '../global/tokens_list.json'
+import * as tokens_matic from '../global/tokens_list_matic.json'
+import * as tokens_bsc from '../global/tokens_list_bsc.json'
+import * as tokens_eth from '../global/tokens_list_eth.json'
 import { withTranslation } from 'react-i18next'
 import config from '../global/config'
 import withCommon from '../styles/common'
 import Footer from '../components/Footer'
 import { generateZipFile } from '../utils/zipFile.js'
-import getWalletAccount from '../utils/getWalletAccount'
+import { getWalletAccount } from '../utils/getWalletAccountandChainID'
 
 
 const { backend } = config
@@ -204,12 +206,35 @@ class EncryptedPublish extends Component {
 		// jumped: true,
 		data: [],
 		token_addr: null,
-		token_symbol: 'MATIC',
+		token_symbol: '',
 		decimal: 0,
 		fileList: [],
 		zipedFilesForm: null,
 		submitBtnDisable: true,
 
+	}
+
+	UNSAFE_componentWillMount() {
+		switch (localStorage.getItem('chainId')) {
+		case '0x89':
+			this.tokens = tokens_matic;
+			this.setState({
+				token_symbol: 'MATIC',
+			})
+			break;
+		case '0x38':
+			this.tokens = tokens_bsc;
+			this.setState({
+				token_symbol: 'BNB',
+			})
+			break;
+		default:
+			this.tokens = tokens_eth;
+			this.setState({
+				token_symbol: 'ETH',
+			})
+			break;
+		}
 	}
 
 	async componentDidMount() {
@@ -220,18 +245,18 @@ class EncryptedPublish extends Component {
 			return
 		}
 
-		const chainId = await window.ethereum.request({ method: 'eth_chainId' })
-		if (chainId !== '0x89') {
-			alert(t('please_set_polygon'))
-			await window.ethereum.request({
-				method: 'wallet_switchEthereumChain',
-				params: [
-					{
-						chainId: '0x89',
-					},
-				],
-			})
-		}
+		// const chainId = await window.ethereum.request({ method: 'eth_chainId' })
+		// if (chainId !== '0x89') {
+		// 	alert(t('please_set_polygon'))
+		// 	await window.ethereum.request({
+		// 		method: 'wallet_switchEthereumChain',
+		// 		params: [
+		// 			{
+		// 				chainId: '0x89',
+		// 			},
+		// 		],
+		// 	})
+		// }
 	}
 
 	handleGetPubName = (event) => {
@@ -285,7 +310,7 @@ class EncryptedPublish extends Component {
 	handleSearch = async (value) => {
 		if (value) {
 			value = value.toLowerCase()
-			let tokens_list = tokens.tokens
+			let tokens_list = this.tokens.default.tokens
 			let matched_data = []
 			let reg = new RegExp(value)
 			for (let token of tokens_list) {
@@ -317,7 +342,7 @@ class EncryptedPublish extends Component {
 
 	handleSelectChange = async (value) => {
 		const { t } = this.props
-		let tokens_list = tokens.tokens
+		let tokens_list = this.tokens.default.tokens
 		let address
 		let token_symbol
 		let token_decimal
