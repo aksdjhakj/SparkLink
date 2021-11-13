@@ -65,6 +65,24 @@ const styles = (theme) => ({
 		height: '100%',
 		display: 'flex',
 		flexDirection: 'column',
+		[theme.breakpoints.between('xs', 'sm')]: {
+
+		},
+		[theme.breakpoints.between('sm', 'md')]: {
+			height: '540px',
+		},
+		[theme.breakpoints.between('md', 'lg')]: {
+			height: '540px',
+		},
+		[theme.breakpoints.between('lg', 'xl')]: {
+			height: '540px',
+		},
+		[theme.breakpoints.up('xl')]: {
+			height: '600px',
+		},
+		['@media (min-width:3200px)']: {
+			height: '1060px',
+		},
 	},
 	cardMedia: {
 		// paddingTop: '56.25%', // 16:9
@@ -271,42 +289,68 @@ class Collections extends Component {
 	componentWillUnmount () {
 		web3.setProvider(window.ethereum);
 	}
+	getMetadata = async (contract, ids) => {
+		return Promise.all(ids.map(async (id) => {
+			let ipfs_link = await contract.methods.tokenURI(id).call();
+			var ipfs_hash_arr = ipfs_link.split('/');
+			var ipfs_hash = ipfs_hash_arr[ipfs_hash_arr.length - 1];
+			var meta = 'https://sparklink.mypinata.cloud/ipfs/' + ipfs_hash;
+			// console.debug("meta: " + ids[i] + " " + meta)
+			var error_count = 0;
+			let ret;
+			while (error_count <= 2) {
+				
+				try {
+					ret = (await axios({
+						method: 'get',
+						url: meta,
+						timeout: 1000 * 2,
+					})).data
+					
+					return ret
+				} catch (err) {
+					if(ipfs_hash === 'QmNLei78zWmzUdbeRB3CiUfAizWUrbeeZh5K1rhAQKCh51'){
+						return  {
+							'name': '未上传文件',
+							'description': '请到加密发布处上传文件',
+							'image': 'https://testnets.opensea.io/static/images/placeholder.png',
+							'attributes': [
+								{
+									'display_type': 'boost_percentage',
+									'trait_type': 'Bonuse Percentage',
+									'value': 0
+								},
+								{
+									'trait_type': 'File Address',
+									'value': 'file_url'
+								}
+							]
+						};
+					}
+					error_count = error_count + 1;
+					
+				}
+			}
+			var name_holder = 'SparkNFT#' + id;
+			return  {
+				'name': name_holder,
+				'description': '暂时无法获取到该nft的相关描述',
+				'image': 'https://testnets.opensea.io/static/images/placeholder.png',
+				'attributes': [
+					{
+						'display_type': 'boost_percentage',
+						'trait_type': 'Bonuse Percentage',
+						'value': 0
+					},
+					{
+						'trait_type': 'File Address',
+						'value': 'file_url'
+					}
+				]
+			};
 
-  getMetadata = async (contract, ids) => {
-  	return Promise.all(ids.map(async (id) => {
-  		let ipfs_link = await contract.methods.tokenURI(id).call();
-  		var ipfs_hash_arr = ipfs_link.split('/');
-  		var ipfs_hash = ipfs_hash_arr[ipfs_hash_arr.length - 1];
-  		var meta = 'https://coldcdn.com/api/cdn/v5ynur/ipfs/' + ipfs_hash;
-  		// console.debug("meta: " + ids[i] + " " + meta)
-  		try {
-  			return (await axios({
-  				method: 'get',
-  				url: meta,
-  				timeout: 1000 * 2,
-  			})).data
-  		} catch (err) {
-  			var name_holder = 'SparkNFT#' + id;
-  			var placeholder = {
-  				'name': name_holder,
-  				'description': '暂时无法获取到该nft的相关描述',
-  				'image': 'https://testnets.opensea.io/static/images/placeholder.png',
-  				'attributes': [
-  					{
-  						'display_type': 'boost_percentage',
-  						'trait_type': 'Bonuse Percentage',
-  						'value': 0
-  					},
-  					{
-  						'trait_type': 'File Address',
-  						'value': 'file_url'
-  					}
-  				]
-  			};
-  			return placeholder;
-  		}
-  	}));
-  }
+		}));
+	}
 
   getNft = async (nft, account) => {
   	// let balanceId = [];
@@ -408,9 +452,6 @@ class Collections extends Component {
   							<Grid item xs={12}>
   								<Typography color="inherit" noWrap className={classes.Display7}>
   									{t('collection')}
-  								</Typography>
-  								<Typography color="inherit" className={classes.Display8}>
-  									{t('解决出版困境，源自ERC721支持')}
   								</Typography>
   							</Grid>
   						</Grid>
