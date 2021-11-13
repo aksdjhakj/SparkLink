@@ -172,10 +172,8 @@ const styles = (theme) => ({
 	cardTitle:{
 		overflow: 'hidden',
 		textOverflow: 'ellipsis',
-		display: '-webkit-box',
 		WebkitLineClamp: 2,
-		lineClamp: 2,
-		WebkitBoxOrient: 'vertical',		
+		lineClamp: 2,	
 	}
 })
 class Collections extends Component {
