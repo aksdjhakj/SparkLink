@@ -69,16 +69,16 @@ const styles = (theme) => ({
 
 		},
 		[theme.breakpoints.between('sm', 'md')]: {
-			height: '540px',
+			height: '560px',
 		},
 		[theme.breakpoints.between('md', 'lg')]: {
-			height: '540px',
+			height: '560px',
 		},
 		[theme.breakpoints.between('lg', 'xl')]: {
-			height: '540px',
+			height: '560px',
 		},
 		[theme.breakpoints.up('xl')]: {
-			height: '600px',
+			height: '620px',
 		},
 		['@media (min-width:3200px)']: {
 			height: '1060px',
@@ -168,6 +168,14 @@ const styles = (theme) => ({
 			gridGap:'105px',
 		},
 		listStyle:'none'
+	},
+	cardTitle:{
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
+		display: '-webkit-box',
+		WebkitLineClamp: 2,
+		lineClamp: 2,
+		WebkitBoxOrient: 'vertical',		
 	}
 })
 class Collections extends Component {
@@ -410,11 +418,12 @@ class Collections extends Component {
   					<Card className={classes.card}>
   						<CardMedia className={classes.cardMedia} image={card.image} title="Image title" />
   						<CardContent className={classes.cardContent}>
-  							<Typography gutterBottom className={classes.Display9}>
-  								<b>{card.title}</b>
+  							<Typography gutterBottom className={classes.Display9+ ' ' + classes.cardTitle}>
+  								{card.title}
   							</Typography>
-  							<Typography className={classes.Display10} style={{color:'black'}}  >{obj.renderDescription(card.description)}</Typography>
+  							<Typography className={classes.Display10+' '+classes.cardTitle} style={{color:'black'}}  >{obj.renderDescription(card.description)}</Typography>
   						</CardContent>
+						  <div style={{flex:1}}></div>
   						<CardActions>
   							<Button className={classes.btnColor3Mini} href={'/#/NFT/' + card.id}>
   								{t('查看')}
