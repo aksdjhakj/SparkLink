@@ -70,7 +70,7 @@ const styles = (theme) => ({
 
 	},
 	Toolbar: {
-		backgroundColor: 'rgb(255,137,106)',
+		backgroundColor: '#EF8F71',
 		maxWidth: '100vw',
 		overflow: 'hidden',
 		minHeight: '0px',

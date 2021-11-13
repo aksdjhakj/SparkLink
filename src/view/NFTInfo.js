@@ -27,7 +27,7 @@ import { LASTCONNECT } from '../global/globalsString'
 import { withTranslation } from 'react-i18next'
 import withCommon from '../styles/common'
 import Footer from '../components/Footer'
-import { getChainName, getWalletAccount } from '../utils/getWalletAccountandChainID'
+import {getWalletAccount } from '../utils/getWalletAccountandChainID'
 const { gateway, backend } = config
 
 // const mathwallet = require('math-js-sdk');

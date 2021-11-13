@@ -99,6 +99,9 @@ const styles = (theme) => ({
 			width:'30vw'
 		},
 	},
+	btnMini:{
+		inherit:'MarginT10'
+	},
 	btnPub: {
 		margin: theme.spacing(1),
 		borderRadius: 25,
@@ -121,7 +124,7 @@ const styles = (theme) => ({
 		},
 	},
 	Display9: {
-		inherit: 'MarginT9'
+		inherit: 'MarginT9,DisplaySeBold9'
 	},
 	paper: {
 		marginTop: theme.spacing(8),
@@ -138,7 +141,10 @@ const styles = (theme) => ({
 		height: 60,
 	},
 	btn: {
-		inherit: 'MarginT5'
+		inherit: 'MarginT10'
+	},
+	btnOutlineMini: {
+		inherit: 'MarginT10'
 	},
 	form: {
 		width: '80%',
@@ -1071,7 +1077,7 @@ class EncryptedPublish extends Component {
 								) : (
 									<div></div>
 								)}
-								<label className={classes.Display9}>{t('pic_cover')} *</label>
+								<label className={classes.Display9+' '+classes.MarginT10}>{t('pic_cover')} *</label>
 								<p className={classes.Display11}>{t('pic_cover_tip')}</p>
 								<Dragger {...prop} style={{ width: '100%', minHeight: 100 }} id="Uploader" maxCount='1' accept="image/*">
 									<p className="ant-upload-drag-icon">
@@ -1081,7 +1087,7 @@ class EncryptedPublish extends Component {
 									<p className={classes.Display11}>{t('upload_file_tip2')}</p>
 								</Dragger>
 
-								<label className={classes.Display9}>{t('art_file')} *</label>
+								<label className={classes.Display9+' '+classes.MarginT10}>{t('art_file')} *</label>
 								<p className={classes.Display11}>{t('art_file_tip')} </p>
 								<Dragger {...propFile} style={{ width: '100%', minHeight: 100 }} id="Uploader2">
 									<p className="ant-upload-drag-icon">
@@ -1092,7 +1098,7 @@ class EncryptedPublish extends Component {
 								</Dragger>
 								<Button
 									variant="contained"
-									className={classes.btn}
+									className={classes.btnMini}
 									disabled={this.state.uploadBtnDisable}
 									style={{
 										float: 'right',
@@ -1245,23 +1251,23 @@ class EncryptedPublish extends Component {
 										</Button>
 									</Grid>
 									<Grid item xs style={{ textAlign: 'center' }}>
-										<Button className={classes.btn} onClick={this.handleClickOpen}>
+										<Button className={classes.btnMini} onClick={this.handleClickOpen}>
 											<span className={classes.Display10}> {t('have_submit')} </span>
 										</Button>
 									</Grid>
 								</Grid>
 								<Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-									<DialogTitle id="form-dialog-title">{t('inpt_NFT_ID')}</DialogTitle>
-									<DialogContent>
-										<DialogContentText>{t('inpt_NFT_ID_tip')}</DialogContentText>
-										<label style={{ fontSize: 14, marginBottom: 10 }}>NFT ID *</label>
-										<InputNumber defaultValue={0} min={0} onChange={this.handleGetNFTId} />
+									<DialogTitle   className={classes.MarginB10+' '+classes.MarginT10+' '+classes.MarginL9+' '+classes.MarginR9} id="form-dialog-title" ><span className={classes.Display9}>{t('inpt_NFT_ID')}</span></DialogTitle>
+									<DialogContent className={classes.MarginL9+' '+classes.MarginR9}>
+										<DialogContentText><span  className={classes.Display11}>{t('inpt_NFT_ID_tip')}</span></DialogContentText>
+										<label style={{marginBottom: 10,marginRight:10}}><span   className={classes.Display11}>NFT ID *</span></label>
+										<InputNumber className={classes.inputNum} defaultValue={0} min={0} onChange={this.handleGetNFTId} />
 									</DialogContent>
-									<DialogActions>
-										<Button onClick={this.handleClose} color="primary">
+									<DialogActions  className={classes.MarginB7+' '+classes.MarginT7+' '+classes.MarginL9+' '+classes.MarginR9}>
+										<Button onClick={this.handleClose} className={classes.btnOutlineMini} color="primary">
 											{t('cancel')}
 										</Button>
-										<Button variant="contained" onClick={this.jump} color="primary">
+										<Button className={classes.btnMini} onClick={this.jump} color="primary">
 											{t('go_upload')}
 										</Button>
 									</DialogActions>

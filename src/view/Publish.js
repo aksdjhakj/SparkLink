@@ -153,6 +153,13 @@ const styles = (theme) => ({
 			height: 100
 		}
 	},
+	btnMini:{
+		inherit:'MarginT10'
+	},
+	Display9:{
+		inherit: 'MarginT9,DisplaySeBold9'
+
+	}
 })
 
 class Publish extends Component {
@@ -846,7 +853,7 @@ class Publish extends Component {
 											<TextArea rows={6} id="Description" onChange={this.handleGetDescription} />
 										</Grid>
 									</Grid>
-									<label className={classes.Display9}>
+									<label className={classes.Display9+' '+classes.MarginT10}>
 										{t('pic_cover')} <span style={{ color: 'red' }}>*</span>
 									</label>
 									<p className={classes.Display11}>{t('pic_cover_tip')}</p>
@@ -858,7 +865,7 @@ class Publish extends Component {
 										<p className={classes.Display11}>{t('upload_file_tip2')}</p>
 									</Dragger>
 
-									<label className={classes.Display9}>
+									<label className={classes.Display9+' '+classes.MarginT10}>
 										{t('art_file')} <span style={{ color: 'red' }}>*</span>
 									</label>
 									<p className={classes.Display11}> {t('art_file_tip')}</p>
@@ -871,7 +878,7 @@ class Publish extends Component {
 									</Dragger>
 									<Button
 										variant="contained"
-										className={classes.btn}
+										className={classes.btnMini}
 										disabled={this.state.uploadBtnDisable}
 
 										style={{

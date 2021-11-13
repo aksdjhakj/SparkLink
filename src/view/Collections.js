@@ -233,6 +233,7 @@ class Collections extends Component {
 		// }
 
 		let cards = []
+		
 
 		const nft_number = await contract.methods.balanceOf(account).call()
 		console.log('nft_number: ', nft_number)
@@ -244,7 +245,7 @@ class Collections extends Component {
 		if (ids.length === 0) {
 			return
 		}
-
+		console.log(ids)
 		this.setState({
 			noNFT: false,
 		})
@@ -313,7 +314,8 @@ class Collections extends Component {
 
 
   	const checksum_address = web3.utils.toChecksumAddress(account);
-  	const url = backend + '/api/v1/nft/list?owner=' + checksum_address
+	  const chainName = await getChainName();
+  	const url =  `${backend}/api/v1/nft/list?owner=${checksum_address}&chain=${chainName}`;
 
   	//多链
   	// const checksum_address = web3.utils.toChecksumAddress(account);
