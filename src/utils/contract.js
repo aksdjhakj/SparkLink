@@ -522,6 +522,25 @@ const abi = [
 				type: 'uint64'
 			}
 		],
+		name: 'getRoyaltyFeeByNFTId',
+		outputs: [
+			{
+				internalType: 'uint8',
+				name: '',
+				type: 'uint8'
+			}
+		],
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		inputs: [
+			{
+				internalType: 'uint64',
+				name: '_NFT_id',
+				type: 'uint64'
+			}
+		],
 		name: 'getShillPriceByNFTId',
 		outputs: [
 			{

@@ -1798,6 +1798,24 @@ let styleCommon = (theme) => {
 				fontSize: 40,
 			},
 		},
+		DisplayLight12s:{
+			fontFamily:'ANC-Light,source-han-sans-simplified-c, sans-serif',
+			[theme.breakpoints.between('xs', 'sm')]: {
+				fontSize: 14,
+			},
+			[theme.breakpoints.between('sm', 'md')]: {
+				fontSize: 16,
+			},
+			[theme.breakpoints.between('md', 'xl')]: {
+				fontSize: 16,
+			},
+			[theme.breakpoints.up('xl')]: {
+				fontSize: 16,
+			},
+			['@media (min-width:3200px)']: {
+				fontSize: 32,
+			},
+		},
 		PaddingL0:{
 			fontFamily:'ANC,source-han-sans-simplified-c, sans-serif',
 			[theme.breakpoints.between('xs', 'sm')]: {
@@ -1933,16 +1951,16 @@ let styleCommon = (theme) => {
 				paddingLeft: 34,
 			},
 			[theme.breakpoints.between('md', 'lg')]: {
-				paddingLeft: 42,
+				paddingLeft: 38,
 			},
 			[theme.breakpoints.between('lg', 'xl')]: {
-				paddingLeft: 50,
+				paddingLeft: 42,
 			},
 			[theme.breakpoints.up('xl')]: {
-				paddingLeft: 60,
+				paddingLeft: 50,
 			},
 			['@media (min-width:3200px)']: {
-				paddingLeft: 120,
+				paddingLeft: 100,
 			},
 		},
 		PaddingL7:{
@@ -3437,12 +3455,12 @@ let styleCommon = (theme) => {
 			marginRight: theme.spacing(2),
 		},
 		btnImg:{
-			width:'48px',
+			width:'32px',
 			[theme.breakpoints.between('xs', 'sm')]: {
 				width:'36px',
 			},
 			[theme.breakpoints.up('xl')]: {
-				width:'80px',
+				width:'48px',
 			},
 			['@media (min-width:3200px)']: {
 				width:'120px',

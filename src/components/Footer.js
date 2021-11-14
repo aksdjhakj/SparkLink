@@ -72,9 +72,12 @@ let styles = (theme) => ({
 	},
 	helpimg:{
 		inherit:'MarginL10',
-		width:'40%'
+		width:'9vw',
+		[theme.breakpoints.between('xs', 'sm')]: {
+			width: '40%'
+		},
 	},
-	DisplayLight11s:{
+	DisplayLight12s:{
 		whiteSpace:'nowrap',
 		color:'rgba(255,255,255,1.0)',
 		'&:hover':{
@@ -129,7 +132,7 @@ class Footer extends Component {
 									<a className={classes.DisplaySeBold11}  style={{textTransform:'normal',whiteSpace:'nowrap'}}>SparkLink Telegram Bot</a>
 								</div>
 							</Grid>
-							<Grid item xs={12} className={classes.MarginT8} style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+							<Grid item xs={12}  style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
 								<a className={classes.btnImgRound} href='https://twitter.com/SparkLink_io'><img className={classes.btnImg} src={logoTwi} /></a>
 								<a className={classes.btnImgRound} href='https://t.co/lh0TzLZdEo?amp=1' ><img className={classes.btnImg} src={logoDis} /></a>
 								<a className={classes.btnImgRound} href='https://github.com/SparkNFT' ><img className={classes.btnImg} src={logoGit} /></a>
@@ -140,16 +143,16 @@ class Footer extends Component {
 						<Divider className={classes.MarginL6+' '+classes.MarginT2}  orientation="vertical" variant="middle" flexItem style={{backgroundColor:'rgba(254, 248, 248, 0.42)'}} />
 						<Grid item className={classes.MarginT2} direction='column' container style={{color: 'white' }} xs={12} sm={true} >
 							<div style={{display :'flex'}}>
-								<div className={classes.MarginL6+' '+classes.MarginR2} style={{display: 'flex' ,flexDirection: 'column'}}>
-									<span className={classes.DisplaySeBold9} style={{paddingLeft: '0px'}}>{t('resources')}</span>
-									<a href='' className={classes.DisplayLight11s}>Conditions</a>
-									<a href='' className={classes.DisplayLight11s}>Privacy Policy</a>
-									<a href='' className={classes.DisplayLight11s}>People</a>
+								<div className={classes.MarginL7+' '+classes.MarginR3} style={{display: 'flex' ,flexDirection: 'column'}}>
+									<span className={classes.DisplaySeBold11} style={{paddingLeft: '0px'}}>{t('resources')}</span>
+									<a href='' className={classes.DisplayLight12s}>Conditions</a>
+									<a href='' className={classes.DisplayLight12s}>Privacy Policy</a>
+									<a href='' className={classes.DisplayLight12s}>People</a>
 								</div>
 								<div style={{display: 'flex' ,flexDirection: 'column'}}>
-									<span className={classes.DisplaySeBold10} style={{paddingLeft: '0px'}}>{t('market')}</span>
-									<a href='https://sparklink.io/#/buy' className={classes.DisplayLight11s}>SparkLink-Market</a>
-									<a href='https://opensea.io/' className={classes.DisplayLight11s}>OpenSea</a>
+									<span className={classes.DisplaySeBold11} style={{paddingLeft: '0px'}}>{t('market')}</span>
+									<a href='https://sparklink.io/#/buy' className={classes.DisplayLight12s}>SparkLink-Market</a>
+									<a href='https://opensea.io/' className={classes.DisplayLight12s}>OpenSea</a>
 								</div>
 							</div>
 						</Grid>

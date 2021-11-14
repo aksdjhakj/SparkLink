@@ -255,7 +255,7 @@ class NFTInfo extends Component {
 			})
 			window.location.href = '/#/'
 		}
-
+		console.log(this.props.match.params.id)
 		const token_addr = await contract.methods.getTokenAddrByNFTId(this.props.match.params.id).call()
 		const res = await contract.methods.getProfitByNFTId(this.props.match.params.id).call()
 		if (token_addr == '0x0000000000000000000000000000000000000000') {
@@ -285,10 +285,10 @@ class NFTInfo extends Component {
 			})
 		}
 		const meta = await contract.methods.tokenURI(this.props.match.params.id).call()
+		console.log('meta',meta)
 		// https://coldcdn.com/api/cdn/v5ynur/ipfs/QmV7s3xrtwxfBa7VDcqHGFKcSjKdLZL7offiC31yM2NSqz
 		let hash = meta.split('/')
-		const issue = await contract.methods.getIssueIdByNFTId(this.props.match.params.id).call()
-		const royalty = await contract.methods.getRoyaltyFeeByIssueId(issue).call()
+		const royalty = await contract.methods.getRoyaltyFeeByNFTId(this.props.match.params.id).call()
 		let file_hash = hash[hash.length - 1]
 		let request_url = 'https://coldcdn.com/api/cdn/v5ynur/ipfs/' + file_hash
 

@@ -204,7 +204,7 @@ class Collections extends Component {
 			web3.setProvider(new Web3.providers.HttpProvider('https://polygon-mainnet.infura.io/v3/0232394ba4b34544a778575aefa2ee8c'))
 			break;
 		case 'bsc':
-			web3.setProvider(new Web3.providers.HttpProvider('https://polygon-mainnet.infura.io/v3/0232394ba4b34544a778575aefa2ee8c'))
+			web3.setProvider(new Web3.providers.HttpProvider('https://bsc-dataseed1.binance.org:443'))
 			break;
 		case 'eth':
 			web3.setProvider(new Web3.providers.HttpProvider('https://polygon-mainnet.infura.io/v3/0232394ba4b34544a778575aefa2ee8c'))
