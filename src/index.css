@@ -81,6 +81,16 @@ code {
   .MuiDialog-paperWidthSm{
     max-width: 2000px !important;
   }
+  .ant-empty-img-default{
+    width:400px !important;
+    height:400px !important;
+  }
+  .ant-empty-image{
+    height:400px !important;
+  }
+  .MuiPaper-rounded{
+    border-radius: 40px !important;
+  }
 }
 
 .MuiDialog-paperWidthSm{

@@ -2969,6 +2969,8 @@ let styleCommon = (theme) => {
 				fontSize: 48,
 				paddingRight: 40,
 				paddingLeft: 40,
+				paddingBottom: 20,
+				paddingTop: 20,
 			},
 		},
 		btn: {
@@ -3017,6 +3019,9 @@ let styleCommon = (theme) => {
 				fontSize: 56,
 				paddingRight: 64,
 				paddingLeft: 64,
+				paddingTop: 20,
+				paddingBottom: 20,
+
 			},
 		},
 		btnBig: {
@@ -3065,6 +3070,8 @@ let styleCommon = (theme) => {
 				fontSize: 78,
 				paddingRight: 78,
 				paddingLeft: 78,
+				paddingBottom: 20,
+				paddingTop: 20,
 			},
 		},
 		btnOutlineMini: {
@@ -3116,6 +3123,8 @@ let styleCommon = (theme) => {
 				fontSize: 48,
 				paddingRight: 40,
 				paddingLeft: 40,
+				paddingBottom: 20,
+				paddingTop: 20,
 			},
 		},
 		btnOutline: {
@@ -3168,6 +3177,8 @@ let styleCommon = (theme) => {
 				fontSize: 56,
 				paddingRight: 64,
 				paddingLeft: 64,
+				paddingBottom: 20,
+				paddingTop: 20,
 			},
 		},
 		btnColor:{
@@ -3463,7 +3474,7 @@ let styleCommon = (theme) => {
 				width:'48px',
 			},
 			['@media (min-width:3200px)']: {
-				width:'120px',
+				width:'96px',
 			},
 		},
 		btnImgRound:{

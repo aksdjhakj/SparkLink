@@ -116,7 +116,25 @@ const styles = (theme) => ({
 	},
 	content2: {
 		fontFamily: 'ANC,source-han-sans-simplified-c, sans-serif',
-		marginLeft:15,
+		
+		[theme.breakpoints.between('xs', 'sm')]: {
+			marginLeft:15,
+		},
+		[theme.breakpoints.between('sm', 'md')]: {
+			marginLeft:25,
+		},
+		[theme.breakpoints.between('md', 'lg')]: {
+			marginLeft:45,
+		},
+		[theme.breakpoints.between('lg', 'xl')]: {
+			marginLeft:55,
+		},
+		[theme.breakpoints.up('xl')]: {
+			marginLeft:75,
+		},
+		['@media (min-width:3200px)']: {
+			marginLeft:140,
+		},
 	},
 	cbutton2: {
 		fontFamily: 'ANC,source-han-sans-simplified-c, sans-serif',
@@ -770,7 +788,7 @@ class NFTInfo extends Component {
 												</Paper >
 											</Grid >
 
-											<Grid item xs={10} sm={6} md={6} lg={6} className={classes.content2 +' ' +classes.PaddingL2}>
+											<Grid item xs={10} sm={6} md={6} lg={6} className={classes.content2 +' ' +classes.PaddingT9}>
 												<Typography
 													color="inherit"
 													align="left"

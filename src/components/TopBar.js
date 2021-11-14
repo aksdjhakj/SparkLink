@@ -23,6 +23,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { message } from 'antd'
 import { getChainId, getChainIdByChainName, getChainName, switchChain } from '../utils/getWalletAccountandChainID'
+import logoETH from '../imgs/chainLogo/ETH.png'
+import logoBSC from '../imgs/chainLogo/BSC.png'
+import logoMatic from '../imgs/chainLogo/matic.png'
+import { IconButton } from '@material-ui/core'
 //import WalletBtn from './WalletBtn'
 
 //TP钱包支持
@@ -176,11 +180,11 @@ const styles = (theme) => ({
 		},
 		[theme.breakpoints.up('xl')]: {
 			fontSize: 24,
-			paddingRight: 12
+			paddingRight: 20
 		},
 		['@media (min-width:3200px)']: {
 			fontSize: 40,
-			paddingRight: 20
+			paddingRight: 40
 		},
 	},
 	btnColor3: {
@@ -233,6 +237,23 @@ const styles = (theme) => ({
 	},
 	btnBox: {
 		inherit: 'PaddingL7,PaddingT7,PaddingB7,PaddingR7'
+	},
+	chainLogo:{
+		[theme.breakpoints.between('xs', 'sm')]: {
+			width: 26,
+		},
+		[theme.breakpoints.between('sm', 'md')]: {
+			width: 26,
+		},
+		[theme.breakpoints.between('md', 'xl')]: {
+			width: 28,
+		},
+		[theme.breakpoints.up('xl')]: {
+			width: 36,
+		},
+		['@media (min-width:3200px)']: {
+			width: 72,
+		},
 	}
 })
 
@@ -641,14 +662,17 @@ class TopBar extends Component {
 		case 'maticBtn':
 			switchResponse = await switchChain('0x89');
 			if(switchResponse) this.setState({chainName: 'matic'})
+			this.handleNetworkMenuClose();
 			break;
 		case 'bscBtn':
 			switchResponse = await switchChain('0x38');
 			if(switchResponse) this.setState({chainName: 'BSC'})
+			this.handleNetworkMenuClose();
 			break;
 		case 'ethBtn':
 			switchResponse = await switchChain('0x1');
 			if(switchResponse) this.setState({chainName: 'ETH'})
+			this.handleNetworkMenuClose();
 			break;
 		}
 	}
@@ -689,6 +713,7 @@ class TopBar extends Component {
 		const fixStyle = isFixed ? { position: 'fixed', top: 0, zIndex: 9, boxShadow: 'rgb(255, 189, 164) 0px 1px 4px' } : {}
 		const fixStyleBlank = isFixed ? { display: 'block', width: '100vw', height: this.state.topbarHeight, maxWidth: '100vw' } : { display: 'none', maxWidth: '100vw' }
 		const menuStyle = (window.innerWidth <= 1000) ? { display: 'block' } : { display: 'none' }
+		const logoImg = (this.state.chainName == 'BSC')?(logoBSC):(((this.state.chainName == 'ETH')?(logoETH):(logoMatic)))
 		let open = false;
 		if (this.state.anchorEl) {
 			open = Boolean(this.state.anchorEl)
@@ -791,19 +816,26 @@ class TopBar extends Component {
 									</a>
 								</div>
 							</div>
+							<Button style={menuStyle} className={classes.btnColor3} aria-controls="basic-menu" aria-haspopup="true" aria-expanded={open ? 'true' : undefined} onClick={handleMenuClick}>
+								<b> ...</b>
+							</Button>
 							<div style={{ flex: '1' }}></div>
 							<Grid item className={classes.btnGrid}>
-								<Button style={menuStyle} className={classes.btnColor3} aria-controls="basic-menu" aria-haspopup="true" aria-expanded={open ? 'true' : undefined} onClick={handleMenuClick}>
-									<b> ...</b>
-								</Button>
+								<LanguageBtn />
 								<React.Fragment>
-									<Button
-										id='switchNetworkBtn'
-										className={classes.btnTopBarMenu + ' ' + classes.MarginR8}
-										onClick={this.handleSwitchNetworkClick}
-									>
-										{this.state.chainName}
-									</Button>
+									{this.state.isConnected ? (
+										<IconButton
+											style={{padding:'0'}}
+											id='switchNetworkBtn'
+											className={classes.MarginR10}
+											onClick={this.handleSwitchNetworkClick}
+										>
+											<img className={classes.chainLogo} src={logoImg}/>
+										</IconButton>
+									):(
+										null
+									)
+									}
 									<Menu id="menu" keepMounted open={this.state.networkMenuDisplay} anchorEl={this.state.networkMenuAnchorEl} onClose={this.handleNetworkMenuClose}>
 										<MenuItem key='matic' >
 											<Button id="maticBtn" style={{ width: '100%' }} onClick={this.handleSwitchNetwork.bind(this,'maticBtn')} className={classes.btnItem}>matic</Button>
@@ -816,6 +848,7 @@ class TopBar extends Component {
 										</MenuItem>
 									</Menu>
 								</React.Fragment>
+								
 								{this.state.isConnected ? (
 									// <Button onClick={this.getAccount}>
 									//   <WalletTwoTone className={classes.icon} />
@@ -844,7 +877,7 @@ class TopBar extends Component {
 										<b> Connect Wallet</b>
 									</Button>
 								)}
-								<LanguageBtn />
+								
 								{/* <Button onClick={this.disconnect}> akdalk</Button> */}
 							</Grid>
 						</Grid>
