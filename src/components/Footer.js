@@ -100,7 +100,7 @@ let styles = (theme) => ({
 		},
 		whiteSpace:'nowrap'
 	},
-	DisplaySeBold11:{
+	DisplaySeBold11s:{
 		color:'rgba(255,255,255,1.0)',
 		'&:hover':{
 			color:'rgb(255,112,67)'
@@ -113,6 +113,16 @@ let styles = (theme) => ({
 			color:'rgb(255,112,67)'
 		},
 		whiteSpace:'nowrap'
+	},
+	btnRoundGroup:{
+		[theme.breakpoints.between('xs', 'sm')]: {
+			marginTop:'20px'
+		},
+	},
+	driver:{
+		[theme.breakpoints.between('xs', 'sm')]: {
+			display:'none'
+		},
 	}
 	
 })
@@ -124,15 +134,15 @@ class Footer extends Component {
 			<div  style={{backgroundColor: '#EF8F71' ,marginTop:'15vh'}}>
 				
 				<Container style={{maxWidth:'100vw',paddingLeft:'0px',paddingRight:'0px'}}>
-					<Grid xs={12} item className={classes.footer + ' ' + classes.PaddingB2+' '+classes.PaddingL6+' '+classes.PaddingR6} container>
-						<Grid className={classes.MarginT2} container item style={{color: 'white',flexGrow:'0'}} xs={12} sm={true} >
+					<Grid xs={12} item className={classes.footer + ' ' + classes.PaddingB3+' '+classes.PaddingL6+' '+classes.PaddingR6} container>
+						<Grid className={classes.MarginT3} container item style={{color: 'white',flexGrow:'0'}} xs={12} sm={true} >
 							<Grid item xs={12} style={{display: 'flex', justifyContent:'center',alignItems:'center'}}>
 								<div style={{display: 'flex',alignItems:'center'}}>
 									<img src={bot} className={classes.botimg} />
-									<a className={classes.DisplaySeBold11}  style={{textTransform:'normal',whiteSpace:'nowrap'}}>SparkLink Telegram Bot</a>
+									<a className={classes.DisplaySeBold11s}  style={{textTransform:'normal',whiteSpace:'nowrap'}}>SparkLink Telegram Bot</a>
 								</div>
 							</Grid>
-							<Grid item xs={12}  style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+							<Grid item xs={12} className={classes.btnRoundGroup}  style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
 								<a className={classes.btnImgRound} href='https://twitter.com/SparkLink_io'><img className={classes.btnImg} src={logoTwi} /></a>
 								<a className={classes.btnImgRound} href='https://t.co/lh0TzLZdEo?amp=1' ><img className={classes.btnImg} src={logoDis} /></a>
 								<a className={classes.btnImgRound} href='https://github.com/SparkNFT' ><img className={classes.btnImg} src={logoGit} /></a>
@@ -140,8 +150,8 @@ class Footer extends Component {
 								<a className={classes.btnImgRound} href='https://t.me/SparkLink_io' ><img className={classes.btnImg} src={logoTele} /></a>
 							</Grid>
 						</Grid>
-						<Divider className={classes.MarginL6+' '+classes.MarginT2}  orientation="vertical" variant="middle" flexItem style={{backgroundColor:'rgba(254, 248, 248, 0.42)'}} />
-						<Grid item className={classes.MarginT2} direction='column' container style={{color: 'white' }} xs={12} sm={true} >
+						<Divider className={classes.MarginL6+' '+classes.MarginT3+' '+classes.driver}  orientation="vertical" variant="middle" flexItem style={{backgroundColor:'rgba(254, 248, 248, 0.42)'}} />
+						<Grid item className={classes.MarginT3} direction='column' container style={{color: 'white' }} xs={12} sm={true} >
 							<div style={{display :'flex'}}>
 								<div className={classes.MarginL7+' '+classes.MarginR3} style={{display: 'flex' ,flexDirection: 'column'}}>
 									<span className={classes.DisplaySeBold11} style={{paddingLeft: '0px'}}>{t('resources')}</span>
@@ -157,7 +167,7 @@ class Footer extends Component {
 							</div>
 						</Grid>
 						<div style={{flex:'1'}}></div>
-						<Grid item xs={12} className={classes.MarginT2} sm={true} style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+						<Grid item xs={12} className={classes.MarginT3} sm={true} style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
 							<a className={classes.DisplaySeBold8}> Need Help? </a><img src={help} className={classes.helpimg} />
 						</Grid>
 						

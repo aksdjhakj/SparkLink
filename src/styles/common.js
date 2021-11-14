@@ -1505,7 +1505,7 @@ let styleCommon = (theme) => {
 				fontSize: 18,
 			},
 			[theme.breakpoints.up('xl')]: {
-				fontSize: 22,
+				fontSize: 20,
 			},
 			['@media (min-width:3200px)']: {
 				fontSize: 40,
@@ -3140,7 +3140,7 @@ let styleCommon = (theme) => {
 				borderWidth: 2,
 			},
 			[theme.breakpoints.between('xs', 'sm')]: {
-				fontSize: 14,
+				fontSize: 16,
 				paddingRight: 16,
 				paddingLeft: 16,
 			},
@@ -3455,7 +3455,7 @@ let styleCommon = (theme) => {
 			marginRight: theme.spacing(2),
 		},
 		btnImg:{
-			width:'32px',
+			width:'36px',
 			[theme.breakpoints.between('xs', 'sm')]: {
 				width:'36px',
 			},

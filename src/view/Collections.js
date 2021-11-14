@@ -47,12 +47,6 @@ const styles = (theme) => ({
 	titleFont: {
 		fontFamily: 'ANC,source-han-sans-simplified-c, sans-serif',
 	},
-	btn: {
-		color: '#424949',
-		borderWidth: 8,
-		borderColor: '#e3f2fd',
-		fontSize: 16,
-	},
 	heroContent: {
 		backgroundColor: theme.palette.background.paper,
 		padding: theme.spacing(36, 0, 6),
